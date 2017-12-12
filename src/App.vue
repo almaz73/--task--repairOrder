@@ -39,6 +39,8 @@
   $font_path: '~@/assets/fonts/';
   $dark_blue_color: #476878;
   $default_text_color: #2f444e;
+  $green_link:#5ead19;
+  $red_link:#d0011b;
 
   @font-face {
     font-family: 'DINPro-Regular';
@@ -59,12 +61,13 @@
   #app {
     font-family: 'DINPro-Regular', Helvetica, Arial, sans-serif;
     color: $default_text_color;
+    font-size: 18px;
   }
 
   //<editor-fold desc="Заголовок" defaultstate="collapsed">
   .repair_header {
     background: $dark_blue_color;
-    font-size: 18px;
+
     text-align: right;
     padding: 27px 0;
     color: #fff;
@@ -97,6 +100,22 @@
     background: rgba(89, 106, 114, 0.2);
     height: 1px;
     border: 0;
+    margin: 19px 0;
+  }
+  .repair_content .title_head{
+    font-size: 44px;
+    padding:10px 0 35px 0;
+  }
+  .repair_content .teaser{
+    padding-bottom: 5px;
+  }
+
+  .repair_content a{
+    color: $green_link;
+    text-decoration: none;
+  }
+  .repair_content a:hover{
+    color: $red_link
   }
 
   //</editor-fold>
