@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="repair_content">
-      <ContentMenu/>
       <div class="title_head">{{title}}</div>
       <div v-for="child in children">
         <hr noshade/>
@@ -12,12 +11,8 @@
   </div>
 </template>
 <script>
-  import ContentMenu from './ContentMenu'
   export default{
     name: 'RepairDateMD',
-    components: {
-      ContentMenu
-    },
     data(){
       return {
         title: '',

@@ -1,41 +1,67 @@
 <template>
   <div>
     <div class="repair_content">
-      <ContentMenu/>
-      <div class="title_head">{{title}}</div>
-      <!--<div v-for="child in children">-->
-      <!--<hr noshade/>-->
-      <!--<a>{{child.name}}</a>-->
-      <!--</div>-->
-      <!--<hr noshade/>-->
+      <div class="title_head">
+        {{title}}
+        <div class="div_center summa">
+          {{tarif * amount}}
+          <span v-if="tarif!==0">&#8381</span>
+        </div>
+        <div class="control_add_count">
+          <span class="sp_left" @click="onCalculate(-1)">
+            <span class="horizont"></span>
+          </span>
+          <span class="sp_right" @click="onCalculate(1)">
+            <span class="horizont"></span>
+            <span class="vertical"></span>
+          </span>
+          <span class="sp_text">
+            {{amount}} × {{tarif}}
+            <span v-if="tarif!==0">&#8381</span>
+           </span>
+        </div>
+        <div class="button_add" @click="addWork">
+          <span>
+            Добавить к заказу
+          </span>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
 <script>
-  import ContentMenu from './ContentMenu'
   export default{
     name: 'RepairDetailMD',
-    components: {
-      ContentMenu
-    },
     data(){
       return {
         title: '',
-        children: {}
+        tarif: 0,
+        amount: 1
       }
     },
     created: function () {
       var JSON = this.$parent.repairJSON
       var idService = this.$parent.idService
       var idWork = this.$parent.idWork
-      console.log(" ==idWork= ", idWork)
       if (idService && idWork) {
         var myWorks = JSON.children.find(data => data.id == idService)
         var myDetails = myWorks.children.find(data => data.id == idWork)
         this.title = myDetails.name
       } else {
         //попали без данных, переходим на главную
-        this.$parent.$router.push('/RepairMD')
+        this.$parent.$router.push('/')
+      }
+    },
+    methods: {
+      onCalculate: function (val) {
+        this.amount += val;
+        if (this.amount < 1) {
+          this.amount = 1
+        }
+      },
+      addWork: function(){
+        console.log(" === " )
       }
     }
   }

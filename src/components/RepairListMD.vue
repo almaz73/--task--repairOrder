@@ -1,11 +1,10 @@
 <template>
   <div>
     <div class="repair_content">
-      <ContentMenu/>
       <div class="title_head">{{title}}</div>
       <div v-for="child in children">
         <hr noshade/>
-        <span>{{child.data.tarif | filterMoney}} <span v-if="child.data.tarif!==0">&#8381</span></span>
+        <span class="span_rigth">{{child.data.tarif | filterMoney}} <span v-if="child.data.tarif!==0">&#8381</span></span>
         <a @click="$parent.onChoiceWork(child.id)">{{child.name}} </a>
       </div>
       <hr noshade/>
@@ -13,12 +12,8 @@
   </div>
 </template>
 <script>
-  import ContentMenu from './ContentMenu'
   export default{
     name: 'RepairListMD',
-    components: {
-      ContentMenu
-    },
     data(){
       return {
         title: '',
@@ -34,7 +29,7 @@
         this.children = myWorks.children
       } else {
         //попали без данных, переходим на главную
-        this.$parent.$router.push('/RepairMD')
+        this.$parent.$router.push('/')
       }
     },
     filters: {
