@@ -5,9 +5,9 @@
         {{title}}
         <div class="div_center summa">
           {{tarif * amount}}
-          <span v-if="tarif!==0">&#8381</span>
+          <span>&#8381</span>
         </div>
-        <div class="control_add_count">
+        <div class="control_add_count" v-if="tarif!==0">
           <span class="sp_left" @click="onCalculate(-1)">
             <span class="horizont"></span>
           </span>
@@ -48,6 +48,7 @@
         var myWorks = JSON.children.find(data => data.id == idService)
         var myDetails = myWorks.children.find(data => data.id == idWork)
         this.title = myDetails.name
+        this.tarif = myDetails.data.tarif
       } else {
         //попали без данных, переходим на главную
         this.$parent.$router.push('/')
