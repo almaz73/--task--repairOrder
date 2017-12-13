@@ -5,6 +5,12 @@
       <span class="icon-settings icons"></span>
       <span class="icon-logout icons"></span>
     </div>
+    <router-link to="/RepairMD">RepairMD</router-link>
+    <router-link to="/RepairListMD">RepairListMD</router-link>
+    <router-link to="/RepairDetailMD">RepairDetailMD</router-link>
+    <router-link to="/RepairOrderMD">RepairOrderMD</router-link>
+    <router-link to="/RepairDateMD">RepairDateMD</router-link>
+    <router-link to="/RepairDoneMD">RepairDoneMD</router-link>
     <router-view v-if="repairJSON"></router-view>
   </div>
 </template>
@@ -48,7 +54,7 @@
         return new Promise((resolve, reject) => {
           // получаем через промисы JSON
           setTimeout(function () {
-            console.log(" ==получил JSON= ")
+//            console.log(" ==получил JSON= ")
             resolve(RepairData.dataJson)
           }, 200)
         })
@@ -62,9 +68,15 @@
     },
     methods: {
       onChoiceService: function (id) {
-        // выбрали вид работ, переходим на список работ
+        // выбрали вид сервиса, переходим на список работ
         this.idService = id
         this.$router.push('/RepairListMD')
+      },
+      onChoiceWork: function (id) {
+        console.log(" ==id= ", id)
+        // выбрали вид работ, переходим на детали
+        this.idWork = id
+        this.$router.push('/RepairDetailMD')
       }
     }
   }
@@ -155,6 +167,11 @@
 
   .repair_content a:hover {
     color: $red_link
+  }
+
+  .repair_content span {
+    margin-left: 5px;
+    float: right;
   }
 
   //</editor-fold>
