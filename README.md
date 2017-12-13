@@ -1,3 +1,5 @@
+> [Demo](http://fmap.ru/games/game/Repair/)
+
 # repair_order
 
 > A Vue.js project
