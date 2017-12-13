@@ -3,6 +3,9 @@
     <div class="repair_content">
       <div class="title_head">
         {{title}}
+
+
+
         <div class="div_center summa">
           {{tarif * amount}}
           <span>&#8381</span>
@@ -37,13 +40,15 @@
       return {
         title: '',
         tarif: 0,
-        amount: 1
+        amount: 1,
+        idWork: null
       }
     },
     created: function () {
       var JSON = this.$parent.repairJSON
       var idService = this.$parent.idService
       var idWork = this.$parent.idWork
+      this.idWork = idWork
       if (idService && idWork) {
         var myWorks = JSON.children.find(data => data.id == idService)
         var myDetails = myWorks.children.find(data => data.id == idWork)
@@ -61,8 +66,9 @@
           this.amount = 1
         }
       },
-      addWork: function(){
-        console.log(" === " )
+      addWork: function () {
+        console.log(" === ", this.idWork, this.amount * this.tarif)
+        this.$parent.onAddWork(this.idWork, this.title, this.amount * this.tarif)
       }
     }
   }

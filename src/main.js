@@ -10,6 +10,15 @@ Vue.use(VueRouter)
 
 Vue.config.productionTip = false
 
+Vue.filter('filterMoney', function (val) {
+  if (val == 0) {
+    return "Бесплатно"
+  } else {
+    return val;
+  }
+})
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

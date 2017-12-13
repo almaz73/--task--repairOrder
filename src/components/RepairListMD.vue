@@ -4,7 +4,8 @@
       <div class="title_head">{{title}}</div>
       <div v-for="child in children">
         <hr noshade/>
-        <span class="span_rigth">{{child.data.tarif | filterMoney}} <span v-if="child.data.tarif!==0">&#8381</span></span>
+        <span class="span_rigth">{{child.data.tarif | filterMoney}} <span
+          v-if="child.data.tarif!==0">&#8381</span></span>
         <a @click="$parent.onChoiceWork(child.id)">{{child.name}} </a>
       </div>
       <hr noshade/>
@@ -30,15 +31,6 @@
       } else {
         //попали без данных, переходим на главную
         this.$parent.$router.push('/')
-      }
-    },
-    filters: {
-      filterMoney: function (val) {
-        if (val == 0) {
-          return "Бесплатно"
-        } else {
-          return val;
-        }
       }
     }
   }

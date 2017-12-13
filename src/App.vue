@@ -67,7 +67,8 @@
     router: router,
     data(){
       return {
-        idService: null
+        idService: null,
+        orderArr: []
       }
     },
     methods: {
@@ -80,6 +81,17 @@
         // выбрали вид работ, переходим на детали
         this.idWork = id
         this.$router.push('/RepairDetailMD')
+      },
+      onAddWork: function (idWork, title, sum) {
+        // добавляем в корзину работу
+        this.orderArr.push({idWork, title, sum})
+        this.$router.push('/RepairOrderMD')
+      },
+      onRemoveWork: function (idWork) {
+        // удаялем из корзины работу
+        this.orderArr = this.orderArr.filter(el => {
+          return el.idWork !== idWork
+        })
       }
     }
   }
@@ -191,7 +203,8 @@
     padding: 30px 0;
     font-size: 36px;
   }
-  .button_add{
+
+  .button_add {
     margin-top: 40px;
     width: 220px;
     height: 50px;
@@ -200,7 +213,8 @@
     color: white;
     cursor: pointer;
   }
-  .button_add span{
+
+  .button_add span {
     display: block;
     text-align: center;
     width: 200px;
@@ -208,8 +222,14 @@
     padding-top: 10px;
   }
 
+  img.trash {
+    margin-left: 30px;
+    vertical-align: text-bottom;
+    cursor: pointer
+  }
+
   //</editor-fold>
-  //<editor-fold desc="control_add_count" defaultstate="collapsed">
+  //<editor-fold desc="Калькулятор добавления" defaultstate="collapsed">
   .control_add_count {
     position: relative;
     height: 40px;
@@ -225,8 +245,8 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    top:4px;
-    cursor:pointer;
+    top: 4px;
+    cursor: pointer;
   }
 
   .control_add_count .horizont {
@@ -234,37 +254,40 @@
     width: 14px;
     height: 2px;
     left: 8px;
-    top:14px;
+    top: 14px;
     background-color: #d0011b;
   }
+
   .control_add_count .vertical {
     position: absolute;
     width: 2px;
     height: 14px;
     left: 14px;
-    top:8px;
+    top: 8px;
     background-color: #5ead19;
   }
 
   .sp_left {
     border: 1px solid #d0011b;
-    left:10px;
+    left: 10px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
   }
 
   .sp_right {
     border: 1px solid #5ead19;
-    left:41px;
+    left: 41px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
-  .sp_right .horizont{
+
+  .sp_right .horizont {
     background-color: #5ead19;
   }
-  .sp_text{
+
+  .sp_text {
     position: absolute;
-    right:46px;
+    right: 46px;
     top: 8px;
   }
 
