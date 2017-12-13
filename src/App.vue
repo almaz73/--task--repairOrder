@@ -1,37 +1,66 @@
 <template>
   <div id="app">
-    <RepairMD
-      v-if="repairSJON"
-      :title = "repairSJON.title"
-      :teaser_card = "repairSJON.teaser_card"
-      :children="repairSJON.children"
-    />
-    <RepairData/>
-<!--!!! {{ repairSJON }}  json получен  !!!-->
+    <div class="repair_header">
+      Константинопольский К.
+      <span class="icon-settings icons"></span>
+      <span class="icon-logout icons"></span>
+    </div>
 
+    <router-link to="/RepairMD">RepairMD</router-link>
+    <router-link to="/RepairListMD">RepairListMD</router-link>
+    <router-link to="/RepairDetailMD">RepairDetailMD</router-link>
+    <router-link to="/RepairOrderMD">RepairOrderMD</router-link>
+    <router-link to="/RepairDateMD">RepairDateMD</router-link>
+    <router-link to="/RepairDoneMD">RepairDoneMD</router-link>
+    <router-view v-if="repairJSON"></router-view>
   </div>
 </template>
 
 <script>
-  import RepairMD from './components/RepairMD'
+  import VueRouter from 'vue-router'
   import RepairData from './datas/RepairData'
+  import RepairMD from './components/RepairMD'
+  import RepairListMD from './components/RepairListMD'
+  import RepairDetailMD from './components/RepairDetailMD'
+  import RepairOrderMD from './components/RepairOrderMD'
+  import RepairDateMD from './components/RepairDateMD'
+  import RepairDoneMD from './components/RepairDoneMD'
+
+
+  var router = new VueRouter({
+    routes: [
+      {path: "/RepairMD", component: RepairMD},
+      {path: "/RepairListMD", component: RepairListMD},
+      {path: "/RepairDetailMD", component: RepairDetailMD},
+      {path: "/RepairOrderMD", component: RepairOrderMD},
+      {path: "/RepairDateMD", component: RepairDateMD},
+      {path: "/RepairDoneMD", component: RepairDoneMD},
+    ]
+  })
+
   export default {
     name: 'app',
     components: {
       RepairMD,
-      RepairData
+      RepairData,
+      RepairListMD,
+      RepairDetailMD,
+      RepairOrderMD,
+      RepairDateMD,
+      RepairDoneMD
     },
     asyncComputed: {
-      repairSJON(){
+      repairJSON(){
         return new Promise((resolve, reject) => {
           // получаем через промисы JSON
           setTimeout(function () {
-            console.log(" ==получил JSON= " )
+            console.log(" ==получил JSON= ")
             resolve(RepairData.dataJson)
           }, 200)
         })
       }
-    }
+    },
+    router: router
   }
 </script>
 
@@ -39,8 +68,8 @@
   $font_path: '~@/assets/fonts/';
   $dark_blue_color: #476878;
   $default_text_color: #2f444e;
-  $green_link:#5ead19;
-  $red_link:#d0011b;
+  $green_link: #5ead19;
+  $red_link: #d0011b;
 
   @font-face {
     font-family: 'DINPro-Regular';
@@ -102,19 +131,22 @@
     border: 0;
     margin: 19px 0;
   }
-  .repair_content .title_head{
+
+  .repair_content .title_head {
     font-size: 44px;
-    padding:10px 0 35px 0;
+    padding: 10px 0 35px 0;
   }
-  .repair_content .teaser{
+
+  .repair_content .teaser {
     padding-bottom: 5px;
   }
 
-  .repair_content a{
+  .repair_content a {
     color: $green_link;
     text-decoration: none;
   }
-  .repair_content a:hover{
+
+  .repair_content a:hover {
     color: $red_link
   }
 
