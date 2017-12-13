@@ -6,7 +6,7 @@
       <div class="teaser">{{teaser_card}}</div>
       <div v-for="child in children">
         <hr noshade/>
-        <a href="#">{{child.title}}</a>
+        <a @click="$parent.onChoiceService(child.id)">{{child.title}}</a>
       </div>
       <hr noshade/>
     </div>
@@ -21,12 +21,9 @@
     },
     created: function () {
       var JSON = this.$parent.repairJSON
-      if (JSON) {
-        this.title = JSON.title
-        this.teaser_card = JSON.teaser_card
-        this.children = JSON.children
-      }
-    },
-    methods: {}
+      this.title = JSON.title
+      this.teaser_card = JSON.teaser_card
+      this.children = JSON.children
+    }
   }
 </script>

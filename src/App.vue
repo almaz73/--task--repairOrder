@@ -5,13 +5,6 @@
       <span class="icon-settings icons"></span>
       <span class="icon-logout icons"></span>
     </div>
-
-    <router-link to="/RepairMD">RepairMD</router-link>
-    <router-link to="/RepairListMD">RepairListMD</router-link>
-    <router-link to="/RepairDetailMD">RepairDetailMD</router-link>
-    <router-link to="/RepairOrderMD">RepairOrderMD</router-link>
-    <router-link to="/RepairDateMD">RepairDateMD</router-link>
-    <router-link to="/RepairDoneMD">RepairDoneMD</router-link>
     <router-view v-if="repairJSON"></router-view>
   </div>
 </template>
@@ -36,7 +29,8 @@
       {path: "/RepairDateMD", component: RepairDateMD},
       {path: "/RepairDoneMD", component: RepairDoneMD},
     ]
-  })
+  });
+  var myRouter = router
 
   export default {
     name: 'app',
@@ -60,7 +54,19 @@
         })
       }
     },
-    router: router
+    router: router,
+    data(){
+      return {
+        idService: null
+      }
+    },
+    methods: {
+      onChoiceService: function (id) {
+        // выбрали вид работ, переходим на список работ
+        this.idService = id
+        this.$router.push('/RepairListMD')
+      }
+    }
   }
 </script>
 
@@ -144,6 +150,7 @@
   .repair_content a {
     color: $green_link;
     text-decoration: none;
+    cursor: pointer;
   }
 
   .repair_content a:hover {
