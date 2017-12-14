@@ -19,6 +19,7 @@
       </div>
 
       <hr noshade/>
+      <a @click="$parent.$_goToComponent('')">+ Добавить еще одну услугу </a>
     </div>
   </div>
 </template>
@@ -38,11 +39,14 @@
         this.children = orderArr
       } else {
         //попали без данных, переходим на главную
-        this.$parent.$router.push('/')
+        this.$parent.$_goToComponent('')
       }
     },
     methods: {
-      onRemoveWork: function (idWork) {
+      /**
+       * удалим выбронную работу
+       */
+       onRemoveWork: function (idWork) {
         this.$parent.onRemoveWork(idWork)
         this.children = this.children.filter(el => {
           return el.idWork !== idWork

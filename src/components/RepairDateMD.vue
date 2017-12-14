@@ -28,7 +28,7 @@
         this.children = myService.children
       } else {
         //попали без данных, переходим на главную
-        this.$parent.$router.push('/RepairMD')
+        this.$parent.$_goToComponent('')
       }
     }
   }

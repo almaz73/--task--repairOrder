@@ -56,7 +56,7 @@
         this.tarif = myDetails.data.tarif
       } else {
         //попали без данных, переходим на главную
-        this.$parent.$router.push('/')
+        this.$parent.$_goToComponent('')
       }
     },
     methods: {
@@ -67,7 +67,6 @@
         }
       },
       addWork: function () {
-        console.log(" === ", this.idWork, this.amount * this.tarif)
         this.$parent.onAddWork(this.idWork, this.title, this.amount * this.tarif)
       }
     }

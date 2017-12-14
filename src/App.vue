@@ -13,7 +13,13 @@
     <!--<router-link to="/RepairDateMD">RepairDateMD</router-link>-->
     <!--<router-link to="/RepairDoneMD">RepairDoneMD</router-link>-->
 
-    <ContentMenu class="top_arrows"/>
+    <ContentMenu
+      class="top_arrows"
+      :idService="idService"
+      :orderArr="orderArr"
+      :isData="isData"
+      :matchedComponent="matchedComponent"
+    />
     <router-view v-if="repairJSON"></router-view>
   </div>
 </template>
@@ -58,7 +64,6 @@
         return new Promise((resolve, reject) => {
           // получаем через промисы JSON
           setTimeout(function () {
-//            console.log(" ==получил JSON= ")
             resolve(RepairData.dataJson)
           }, 200)
         })
@@ -68,30 +73,66 @@
     data(){
       return {
         idService: null,
-        orderArr: []
+        idWork: null,
+        orderArr: [],
+        isData: false,
+        matchedComponent: ''
       }
     },
     methods: {
+      /**
+       * Выбрали вид услуг, переходим на список работ
+       *
+       * @param id {Number}
+       */
       onChoiceService: function (id) {
-        // выбрали вид сервиса, переходим на список работ
         this.idService = id
-        this.$router.push('/RepairListMD')
+        this.$_goToComponent('RepairListMD')
       },
-      onChoiceWork: function (id) {
-        // выбрали вид работ, переходим на детали
-        this.idWork = id
-        this.$router.push('/RepairDetailMD')
+      /**
+       * Выбрали вид работ, переходим на детали
+       *
+       * @param id {Number}
+       */
+      onChoiceWork: function (idWork) {
+        this.idWork = idWork
+        this.$_goToComponent('RepairDetailMD')
       },
+      /**
+       * Добавляем в корзину работу
+       *
+       * @param idWork {Number}
+       * @param title {String}
+       * @param sum {Number}
+       */
       onAddWork: function (idWork, title, sum) {
-        // добавляем в корзину работу
         this.orderArr.push({idWork, title, sum})
-        this.$router.push('/RepairOrderMD')
+        this.$_goToComponent('RepairOrderMD')
       },
+      /**
+       * Удаляем из корзины работу
+       *
+       * @param idWork {Number}
+       */
       onRemoveWork: function (idWork) {
-        // удаялем из корзины работу
         this.orderArr = this.orderArr.filter(el => {
           return el.idWork !== idWork
         })
+      },
+      /**
+       * Переход к компоненту
+       * @param val {String} Имя компонента
+       */
+      $_goToComponent: function (val) {
+        val = (val === "RepairMD") ? "/" : val
+        this.$router.push('/' + val)
+        this.$_updateMatchedComponent()
+      },
+      /**
+       * Обновление для указателя ContentMenu
+       */
+      $_updateMatchedComponent: function () {
+        this.matchedComponent = this.$router.getMatchedComponents()[0].name
       }
     }
   }
@@ -118,6 +159,20 @@
   body {
     margin: 0;
     padding: 0;
+  }
+
+  a {
+    color: $green_link;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: $red_link
+  }
+
+  .bold_text {
+    font-weight: bold;
   }
 
   #app {
@@ -178,16 +233,6 @@
 
   .repair_content .teaser {
     padding-bottom: 5px;
-  }
-
-  .repair_content a {
-    color: $green_link;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .repair_content a:hover {
-    color: $red_link
   }
 
   .repair_content .span_rigth {

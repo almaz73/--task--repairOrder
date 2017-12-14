@@ -30,7 +30,7 @@
         this.children = myWorks.children
       } else {
         //попали без данных, переходим на главную
-        this.$parent.$router.push('/')
+        this.$parent.$_goToComponent('')
       }
     }
   }
