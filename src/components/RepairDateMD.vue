@@ -12,11 +12,17 @@
           <span @click="onChangeDate">
             <span class="arrow_down"></span>
           </span>
+            <div class="panelDate panelDays">
+              <span v-for="day in DAYS">
+                {{day.day | moment("DD MMM") | russ }}
+              </span>
+            </div>
         </span>
         <span class="window_date">10:00
           <span @click="onChangeTime">
             <span class="arrow_down"></span>
           </span>
+            <!--<div class="panelDate panelTimes">9239042384290</div>-->
         </span>
       </div>
       <div class="button_add" @click="$parent.$_goToComponent('RepairDoneMD')">
@@ -28,6 +34,7 @@
   </div>
 </template>
 <script>
+  let today = new Date();
   export default{
     name: 'RepairDateMD',
     data(){
@@ -35,11 +42,18 @@
         title: 'Ремонт',
         totalAmmount: 0,
         positions: 0,
-        wordSelection: "услуг"
+        wordSelection: "услуг",
+        DAYS:[]
       }
     },
     created: function () {
       let orderArr = this.$parent.orderArr
+
+      for(let i=0; i<30; i++){
+        var nextDay = new Date()
+        nextDay.setDate(today.getDate()+i)
+        this.DAYS.push({day: nextDay} )
+      }
       orderArr.forEach(el => {
         this.totalAmmount += el.sum
         this.positions++

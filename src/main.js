@@ -23,6 +23,25 @@ Vue.filter('filterMoney', function (val) {
   }
 })
 
+Vue.filter('russ', function (val) {
+  var newText="";
+  switch (val.slice(-3)){
+    case "Jan": newText = "январь"; break;
+    case "Feb": newText = "февраль"; break;
+    case "Mar": newText = "март"; break;
+    case "Apr": newText = "апрель"; break;
+    case "May": newText = "май"; break;
+    case "Jun": newText = "июнь"; break;
+    case "Jul": newText = "июль"; break;
+    case "Avg": newText = "август"; break;
+    case "Sen": newText = "сентябрь"; break;
+    case "Oct": newText = "октябрь"; break;
+    case "Nov": newText = "ноябрь"; break;
+    case "Dec": newText = "декабрь"; break;
+  }
+  return val.slice(0,val.length-3)+newText
+})
+
 
 /* eslint-disable no-new */
 new Vue({

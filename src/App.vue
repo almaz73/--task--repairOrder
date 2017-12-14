@@ -358,6 +358,7 @@
     border: 1px solid $color_dark_blue;
     padding: 14px 5px 20px 20px;
     margin-right: 10px;
+    position: relative;
   }
 
   .control_data .window_date > span {
@@ -384,7 +385,19 @@
     margin-top: 43px;
   }
 
+  .panelDate{
+    position: absolute;
+    top:55px;
+    left:-20px;
+    width: 300px;
+    height: 160px;
+    border: 1px solid $color_dark_blue;
+    background: white;
+    z-index: 10;
+  }
+
   //</editor-fold>
+
 
 
 </style>
