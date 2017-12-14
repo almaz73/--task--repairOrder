@@ -70,9 +70,9 @@
         orderArr: [],           // набор корзины
         isData: false,          // уже открыли панель выбора даты
         matchedComponent: '',   // имя текущего открытого компонента
-        myDate: '29 апреля',
-        myTime: '10:00',
-        myOrder: 'Ремонт, 2 услуги'
+        myDate: '',
+        myTime: '',
+        myOrder: ''
       }
     },
     methods: {
@@ -90,6 +90,7 @@
        *
        * @param idWork {Number}
        * @param sum {Number} пришли из корзины менять количество
+       * @param idService {Number} пришли из корзины
        */
       onChoiceWork: function (idWork, sum, idService) {
         this.idWork = idWork
@@ -182,6 +183,10 @@
 
   a:hover {
     color: $red_link
+  }
+
+  .small_text {
+    font-size: 14px;
   }
 
   .bold_text {
@@ -362,7 +367,7 @@
   }
 
   .control_data .window_date > span {
-    padding: 10px 20px;
+    padding: 10px 22px;
     margin: 0 10px 0 30px;
     position: relative;
     cursor: pointer;
@@ -376,6 +381,50 @@
   }
 
   //</editor-fold>
+  //<editor-fold desc="Календарь и часы" defaultstate="collapsed">
+
+  .panelDate{
+    position: absolute;
+    top:55px;
+    border: 1px solid $color_dark_blue;
+    background: white;
+    z-index: 10;
+  }
+
+  .panelDays{
+    padding: 4px 0 0 4px;
+    width: 214px;
+    height: 160px;
+  }
+
+  .panelTimes{
+    left: -1px;
+    padding: 4px 0 0 4px;
+    width: 152px;
+    height: 160px;
+
+  }
+
+  .small_text a.bt{
+    float: left;
+    padding: 1px;
+    border: 1px solid $color_dark_blue;
+    border-radius: 3px;
+    margin: 0.5px;
+    line-height: 0.8;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+  }
+  .small_text a.bt:hover{
+    background: antiquewhite;
+  }
+
+  .panelTimes.small_text a.bt{
+   font-size: 10px;
+  }
+
+  //</editor-fold>
   //<editor-fold desc="Done" defaultstate="collapsed">
   .img_top {
     margin-top: 50px;
@@ -384,18 +433,6 @@
   .link_top {
     margin-top: 43px;
   }
-
-  .panelDate{
-    position: absolute;
-    top:55px;
-    left:-20px;
-    width: 300px;
-    height: 160px;
-    border: 1px solid $color_dark_blue;
-    background: white;
-    z-index: 10;
-  }
-
   //</editor-fold>
 
 

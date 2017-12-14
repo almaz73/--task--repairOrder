@@ -41,9 +41,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .small_text {
-    font-size: 14px;
-  }
-</style>

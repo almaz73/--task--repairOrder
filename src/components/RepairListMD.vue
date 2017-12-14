@@ -22,10 +22,10 @@
       }
     },
     created: function () {
-      var JSON = this.$parent.repairJSON
-      var idService = this.$parent.idService
+      let JSON = this.$parent.repairJSON
+      let idService = this.$parent.idService
       if (idService) {
-        var myWorks = JSON.children.find(data => data.id == idService)
+        let myWorks = JSON.children.find(data => data.id === idService)
         this.title = myWorks.title
         this.children = myWorks.children
       } else {

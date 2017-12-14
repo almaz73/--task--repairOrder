@@ -54,7 +54,7 @@
         let myDetails = myWorks.children.find(data => data.id === idWork)
         this.title = myDetails.name
         this.tarif = myDetails.data.tarif
-        if (fromBascketSumma !== null) {
+        if (fromBascketSumma !== null && fromBascketSumma !== undefined) {
           this.buttonText = "Сохранить"
           this.amount = (this.tarif !== 0) ? fromBascketSumma / this.tarif : fromBascketSumma
         }

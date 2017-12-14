@@ -17,7 +17,7 @@
     components: {
     },
     created: function () {
-      var JSON = this.$parent.repairJSON
+      let JSON = this.$parent.repairJSON
       this.title = JSON.title
       this.teaser_card = JSON.teaser_card
       this.children = JSON.children

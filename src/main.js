@@ -16,7 +16,7 @@ Vue.use(VueMoment, {
 Vue.config.productionTip = false
 
 Vue.filter('filterMoney', function (val) {
-  if (val == 0) {
+  if (val === 0) {
     return "Бесплатно"
   } else {
     return val;
@@ -24,22 +24,20 @@ Vue.filter('filterMoney', function (val) {
 })
 
 Vue.filter('russ', function (val) {
-  var newText="";
-  switch (val.slice(-3)){
-    case "Jan": newText = "январь"; break;
-    case "Feb": newText = "февраль"; break;
-    case "Mar": newText = "март"; break;
-    case "Apr": newText = "апрель"; break;
-    case "May": newText = "май"; break;
-    case "Jun": newText = "июнь"; break;
-    case "Jul": newText = "июль"; break;
-    case "Avg": newText = "август"; break;
-    case "Sen": newText = "сентябрь"; break;
-    case "Oct": newText = "октябрь"; break;
-    case "Nov": newText = "ноябрь"; break;
-    case "Dec": newText = "декабрь"; break;
-  }
-  return val.slice(0,val.length-3)+newText
+  let arrTemp = []
+  arrTemp["Jan"] = "янв";
+  arrTemp["Feb"] = "фев";
+  arrTemp["Mar"] = "мар";
+  arrTemp["Apr"] = "апр";
+  arrTemp["May"] = "май";
+  arrTemp["Jun"] = "июн";
+  arrTemp["Jul"] = "июл";
+  arrTemp["Avg"] = "авг";
+  arrTemp["Sen"] = "сен";
+  arrTemp["Oct"] = "окт";
+  arrTemp["Nov"] = "ноя";
+  arrTemp["Dec"] = "дек";
+  return val.slice(0,val.length-3)+arrTemp[val.slice(-3)]
 })
 
 
