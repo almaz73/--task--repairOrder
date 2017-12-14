@@ -159,6 +159,7 @@
   $green_link: #5ead19;
   $red_link: #d0011b;
   $width_list: 454px;
+  $color_dark_blue: #596a72;
 
   @font-face {
     font-family: 'DINPro-Regular';
@@ -347,6 +348,30 @@
     display: block;
     text-align: center;
     font-size: 36px;
+  }
+
+  //</editor-fold>
+  //<editor-fold desc="Контрол выбора даты" defaultstate="collapsed">
+  .control_data {
+    margin: 40px 0 70px 0;
+  }
+
+  .control_data .window_date {
+    border: 1px solid $color_dark_blue;
+    padding: 14px 5px 20px 20px;
+    margin-right: 10px;
+  }
+  .control_data .window_date > span{
+    padding: 10px 20px;
+    margin: 0 10px 0 30px;
+    position: relative;
+    cursor: pointer;
+  }
+  .control_data .arrow_down{
+    position: absolute;
+    top:20px;
+    border: 5px solid transparent; /* Прозрачные границы */
+    border-top: 8px solid $color_dark_blue;; /* Добавляем треугольник */
   }
 
   //</editor-fold>
