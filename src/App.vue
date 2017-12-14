@@ -5,14 +5,6 @@
       <span class="icon-settings icons"></span>
       <span class="icon-logout icons"></span>
     </div>
-
-    <!--<router-link to="/">RepairMD</router-link>-->
-    <!--<router-link to="/RepairListMD">RepairListMD</router-link>-->
-    <!--<router-link to="/RepairDetailMD">RepairDetailMD</router-link>-->
-    <!--<router-link to="/RepairOrderMD">RepairOrderMD</router-link>-->
-    <!--<router-link to="/RepairDateMD">RepairDateMD</router-link>-->
-    <!--<router-link to="/RepairDoneMD">RepairDoneMD</router-link>-->
-
     <ContentMenu
       class="top_arrows"
       :idService="idService"
@@ -77,10 +69,10 @@
         fromBascketSumma: null, // сумма , если пришли менять количество из корзины
         orderArr: [],           // набор корзины
         isData: false,          // уже открыли панель выбора даты
-        matchedComponent: '',    // имя текущего открытого компонента
-        myDate:'29 апреля',
-        myTime:'10:00',
-        myOrder:'Ремонт, 2 услуги'
+        matchedComponent: '',   // имя текущего открытого компонента
+        myDate: '29 апреля',
+        myTime: '10:00',
+        myOrder: 'Ремонт, 2 услуги'
       }
     },
     methods: {
@@ -99,9 +91,10 @@
        * @param idWork {Number}
        * @param sum {Number} пришли из корзины менять количество
        */
-      onChoiceWork: function (idWork, sum) {
+      onChoiceWork: function (idWork, sum, idService) {
         this.idWork = idWork
         this.fromBascketSumma = sum;
+        this.idService = idService || this.idService;
         this.$_goToComponent('RepairDetailMD')
       },
       /**
@@ -116,12 +109,13 @@
         // исключить дублирование работ
         let exist = this.orderArr.find(el => {
           if (el.idWork === idWork) {
-            return el.sum = sum
+            el.sum = sum
+            return true;
           }
         })
 
         if (!exist) {
-          this.orderArr.push({idWork, title, sum})
+          this.orderArr.push({idWork, title, sum, idService: this.idService})
         }
 
         this.$_goToComponent('RepairOrderMD')
@@ -183,6 +177,7 @@
     color: $green_link;
     text-decoration: none;
     cursor: pointer;
+    padding: 15px 0;
   }
 
   a:hover {
@@ -364,27 +359,31 @@
     padding: 14px 5px 20px 20px;
     margin-right: 10px;
   }
-  .control_data .window_date > span{
+
+  .control_data .window_date > span {
     padding: 10px 20px;
     margin: 0 10px 0 30px;
     position: relative;
     cursor: pointer;
   }
-  .control_data .arrow_down{
+
+  .control_data .arrow_down {
     position: absolute;
-    top:20px;
+    top: 20px;
     border: 5px solid transparent; /* Прозрачные границы */
     border-top: 8px solid $color_dark_blue; /* Добавляем треугольник */
   }
 
   //</editor-fold>
   //<editor-fold desc="Done" defaultstate="collapsed">
-  .img_top{
+  .img_top {
     margin-top: 50px;
   }
-  .link_top{
+
+  .link_top {
     margin-top: 43px;
   }
+
   //</editor-fold>
 
 
