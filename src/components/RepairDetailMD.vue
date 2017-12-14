@@ -23,7 +23,7 @@
         </div>
         <div class="button_add" @click="addWork">
           <span>
-            Добавить к заказу
+            {{buttonText}}
           </span>
         </div>
 
@@ -39,7 +39,8 @@
         title: '',
         tarif: 0,
         amount: 1,
-        idWork: null
+        idWork: null,
+        buttonText: 'Добавить к заказу'
       }
     },
     created: function () {
@@ -53,7 +54,10 @@
         let myDetails = myWorks.children.find(data => data.id === idWork)
         this.title = myDetails.name
         this.tarif = myDetails.data.tarif
-        this.amount = (fromBascketSumma) ? fromBascketSumma / this.tarif : 1
+        if (fromBascketSumma) {
+          this.buttonText = "Сохранить"
+          this.amount = fromBascketSumma / this.tarif
+        }
       } else {
         //попали без данных, переходим на главную
         this.$parent.$_goToComponent('')
