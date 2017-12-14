@@ -13,7 +13,7 @@
             @click="onRemoveWork(child.idWork)"
           >
         </span>
-        <a @click="$parent.onChoiceWork(child.idWork)">{{child.title}} </a>
+        <a @click="$parent.onChoiceWork(child.idWork, child.sum)">{{child.title}} </a>
 
       </div>
 

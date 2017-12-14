@@ -3,6 +3,7 @@
     <div class="repair_content">
       <div class="title_head">
         {{title}}
+
         <div class="div_center summa_text">
           {{tarif * amount}}
           <span>&#8381</span>
@@ -45,12 +46,14 @@
       let JSON = this.$parent.repairJSON
       let idService = this.$parent.idService
       let idWork = this.$parent.idWork
+      let fromBascketSumma = this.$parent.fromBascketSumma
       this.idWork = idWork
       if (idService && idWork) {
         let myWorks = JSON.children.find(data => data.id === idService)
         let myDetails = myWorks.children.find(data => data.id === idWork)
         this.title = myDetails.name
         this.tarif = myDetails.data.tarif
+        this.amount = (fromBascketSumma) ? fromBascketSumma / this.tarif : 1
       } else {
         //попали без данных, переходим на главную
         this.$parent.$_goToComponent('')

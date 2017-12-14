@@ -72,11 +72,12 @@
     router: router,
     data(){
       return {
-        idService: null,
-        idWork: null,
-        orderArr: [],
-        isData: false,
-        matchedComponent: ''
+        idService: null,        // id услуги
+        idWork: null,           // id работы
+        fromBascketSumma: null, // сумма , если пришли менять количество из корзины
+        orderArr: [],           // набор корзины
+        isData: false,          // уже открыли панель выбора даты
+        matchedComponent: ''    // имя текущего открытого компонента
       }
     },
     methods: {
@@ -93,9 +94,11 @@
        * Выбрали вид работ, переходим на детали
        *
        * @param idWork {Number}
+       * @param sum {Number} пришли из корзины менять количество
        */
-      onChoiceWork: function (idWork) {
+      onChoiceWork: function (idWork, sum) {
         this.idWork = idWork
+        this.fromBascketSumma = sum;
         this.$_goToComponent('RepairDetailMD')
       },
       /**
@@ -106,7 +109,18 @@
        * @param sum {Number}
        */
       onAddWork: function (idWork, title, sum) {
-        this.orderArr.push({idWork, title, sum})
+
+        // исключить дублирование работ
+        let exist = this.orderArr.find(el => {
+          if (el.idWork === idWork) {
+            return el.sum = sum
+          }
+        })
+
+        if (!exist) {
+          this.orderArr.push({idWork, title, sum})
+        }
+
         this.$_goToComponent('RepairOrderMD')
       },
       /**
