@@ -1,5 +1,5 @@
 <template>
-  <div class="small_text">
+  <div class="small_text" v-if="matchedComponent!=='RepairDoneMD'">
     <a v-if="idService!==null && matchedComponent!=='RepairMD'"
        @click="$parent.$_goToComponent('')">Услуги</a>
     <span

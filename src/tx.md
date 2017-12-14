@@ -4,3 +4,7 @@ https://forum.vuejs.org/t/where-to-put-my-fonts-folder-using-webpack-from-vue-cl
 
 ----
  > http://jsonviewer.stack.hu/ - смотреть содержимое json
+
+----
+
+> https://github.com/brockpetrie/vue-moment

@@ -77,7 +77,10 @@
         fromBascketSumma: null, // сумма , если пришли менять количество из корзины
         orderArr: [],           // набор корзины
         isData: false,          // уже открыли панель выбора даты
-        matchedComponent: ''    // имя текущего открытого компонента
+        matchedComponent: '',    // имя текущего открытого компонента
+        myDate:'29 апреля',
+        myTime:'10:00',
+        myOrder:'Ремонт, 2 услуги'
       }
     },
     methods: {
@@ -255,7 +258,7 @@
     float: right;
   }
 
-  .repair_content .div_center {
+  .div_center {
     text-align: center;
   }
 
@@ -371,8 +374,18 @@
     position: absolute;
     top:20px;
     border: 5px solid transparent; /* Прозрачные границы */
-    border-top: 8px solid $color_dark_blue;; /* Добавляем треугольник */
+    border-top: 8px solid $color_dark_blue; /* Добавляем треугольник */
   }
 
   //</editor-fold>
+  //<editor-fold desc="Done" defaultstate="collapsed">
+  .img_top{
+    margin-top: 50px;
+  }
+  .link_top{
+    margin-top: 43px;
+  }
+  //</editor-fold>
+
+
 </style>
