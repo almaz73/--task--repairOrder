@@ -36,7 +36,7 @@
   import RepairDoneMD from './components/RepairDoneMD'
 
 
-  var router = new VueRouter({
+  let router = new VueRouter({
     routes: [
       {path: "/", component: RepairMD},
       {path: "/RepairListMD", component: RepairListMD},
@@ -92,7 +92,7 @@
       /**
        * Выбрали вид работ, переходим на детали
        *
-       * @param id {Number}
+       * @param idWork {Number}
        */
       onChoiceWork: function (idWork) {
         this.idWork = idWork
@@ -144,6 +144,7 @@
   $default_text_color: #2f444e;
   $green_link: #5ead19;
   $red_link: #d0011b;
+  $width_list: 454px;
 
   @font-face {
     font-family: 'DINPro-Regular';
@@ -153,7 +154,6 @@
     url($font_path + 'DINPro-Regular.svg#Gotham-Light') format('svg');
     font-weight: normal;
     font-style: normal;
-    line-height: 1.5;
   }
 
   body {
@@ -210,13 +210,13 @@
 
   .top_arrows {
     margin: 0 auto;
-    width: 454px;
+    width: $width_list;
     padding-top: 52px;
   }
 
   .repair_content {
     margin: 0 auto;
-    width: 454px;
+    width: $width_list;
   }
 
   .repair_content hr {
@@ -228,7 +228,7 @@
 
   .repair_content .title_head {
     font-size: 44px;
-    padding: 5px 0 38px 0;
+    margin: 5px 0 38px 0;
   }
 
   .repair_content .teaser {
@@ -244,14 +244,9 @@
     text-align: center;
   }
 
-  .summa {
-    padding: 30px 0;
-    font-size: 36px;
-  }
-
   .button_add {
-    margin-top: 40px;
-    width: 220px;
+    display: inline-block;
+
     height: 50px;
     background-color: #8bc541;
     font-size: 18px;
@@ -262,9 +257,8 @@
   .button_add span {
     display: block;
     text-align: center;
-    width: 200px;
-    margin: 0px auto;
-    padding-top: 10px;
+    margin: 0 40px;
+    padding-top: 11px;
   }
 
   img.trash {
@@ -281,9 +275,7 @@
     border-radius: 5px;
     background-color: rgba(94, 173, 25, 0.05);
     font-size: 18px;
-
-    /*border: 1px solid red;*/
-
+    margin-bottom: 40px;
   }
 
   .control_add_count .sp_left, .control_add_count .sp_right {
@@ -334,6 +326,13 @@
     position: absolute;
     right: 46px;
     top: 8px;
+  }
+
+  .summa_text {
+    margin: 30px 0;
+    display: block;
+    text-align: center;
+    font-size: 36px;
   }
 
   //</editor-fold>

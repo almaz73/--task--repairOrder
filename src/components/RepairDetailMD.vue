@@ -3,10 +3,7 @@
     <div class="repair_content">
       <div class="title_head">
         {{title}}
-
-
-
-        <div class="div_center summa">
+        <div class="div_center summa_text">
           {{tarif * amount}}
           <span>&#8381</span>
         </div>
@@ -45,13 +42,13 @@
       }
     },
     created: function () {
-      var JSON = this.$parent.repairJSON
-      var idService = this.$parent.idService
-      var idWork = this.$parent.idWork
+      let JSON = this.$parent.repairJSON
+      let idService = this.$parent.idService
+      let idWork = this.$parent.idWork
       this.idWork = idWork
       if (idService && idWork) {
-        var myWorks = JSON.children.find(data => data.id == idService)
-        var myDetails = myWorks.children.find(data => data.id == idWork)
+        let myWorks = JSON.children.find(data => data.id === idService)
+        let myDetails = myWorks.children.find(data => data.id === idWork)
         this.title = myDetails.name
         this.tarif = myDetails.data.tarif
       } else {

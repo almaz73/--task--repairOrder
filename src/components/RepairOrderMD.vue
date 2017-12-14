@@ -7,7 +7,6 @@
         <span class="span_rigth">
           {{child.sum | filterMoney}}
           <span v-if="child.sum!==0">&#8381</span>
-          <!--<span class="span_rigth icon-trash"></span>-->
           <img
             class="trash"
             src="../assets/trach.png"
@@ -20,6 +19,17 @@
 
       <hr noshade/>
       <a @click="$parent.$_goToComponent('')">+ Добавить еще одну услугу </a>
+
+      <span class="summa_text">
+        {{totalAmmount}}
+        <span>&#8381</span>
+      </span>
+
+      <div class="button_add" @click="$parent.$_goToComponent('RepairDateMD')">
+          <span>
+            К выбору даты и времени →
+          </span>
+      </div>
     </div>
   </div>
 </template>
@@ -32,8 +42,17 @@
         children: {}
       }
     },
+    computed: {
+      totalAmmount: function () {
+        let sum = 0;
+        this.children.forEach(el => {
+          sum += el.sum
+        })
+        return sum
+      }
+    },
     created: function () {
-      var orderArr = this.$parent.orderArr
+      let orderArr = this.$parent.orderArr
       if (orderArr) {
         this.title = "Заказ ремонта"
         this.children = orderArr
@@ -46,7 +65,7 @@
       /**
        * удалим выбронную работу
        */
-       onRemoveWork: function (idWork) {
+      onRemoveWork: function (idWork) {
         this.$parent.onRemoveWork(idWork)
         this.children = this.children.filter(el => {
           return el.idWork !== idWork
