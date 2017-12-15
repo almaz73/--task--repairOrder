@@ -1,34 +1,32 @@
 <template>
   <div>
     <div class="repair_content">
-      <div class="title_head">{{title}}, {{positions}} {{wordSelection}}</div>
+      <div class="title_head">{{myOrder}}</div>
       <span class="summa_text">
         {{totalAmmount}}
         <span>&#8381</span>
       </span>
       <b>Выберите удобный день и время</b>
       <div class="control_data">
-        <span class="window_date" >{{myDate}}
+        <span class="window_date">{{myDate}}
           <span @click="viewDate = !viewDate">
             <span class="arrow_down"></span>
           </span>
-            <div class="panelDate panelDays small_text" v-if="viewDate">
-              <div v-for="day in DAYS">
-                <a class="bt" @click="onChoiceDay(day.day)"> {{day.day | moment("DD MMM") | russ }} </a>
-              </div>
+          <div class="panelDate panelDays small_text" v-if="viewDate">
+            <div v-for="day in DAYS">
+              <a class="bt" @click="onChoiceDay(day.day)"> {{day.day | moment("DD MMM") | russ }} </a>
             </div>
+          </div>
         </span>
         <span class="window_date">{{myTime}}
           <span @click="viewTime=!viewTime">
             <span class="arrow_down"></span>
           </span>
-            <div class="panelDate panelTimes small_text"  v-if="viewTime">
-              <div v-for="hour in HOURS">
-                <a class="bt" @click="onChoiceHour(hour)"> {{hour}} </a>
-              </div>
+          <div class="panelDate panelTimes small_text" v-if="viewTime">
+            <div v-for="hour in HOURS">
+              <a class="bt" @click="onChoiceHour(hour)"> <div> {{hour}}</div> </a>
             </div>
-
-
+          </div>
         </span>
       </div>
       <div class="button_add" @click="onOrder">
@@ -47,13 +45,13 @@
     name: 'RepairDateMD',
     data(){
       return {
-        title: 'Ремонт',
+        myOrder: '',
         totalAmmount: 0,
         positions: 0,
-        DAYS:[],
-        HOURS:[],
-        myDate:'',
-        myTime:'',
+        DAYS: [],
+        HOURS: [],
+        myDate: '',
+        myTime: '',
         viewDate: false,
         viewTime: false,
       }
@@ -63,22 +61,27 @@
       this.myDate = this.$parent.myDate
       this.myTime = this.$parent.myTime
 
+      if (orderArr.length === 0) {
+        //попали без данных, переходим на главную
+        this.$parent.$_goToComponent('')
+      }
 
-      if (this.myDate === ''){
+
+      if (this.myDate === '') {
         this.onChoiceDay(new Date())
       }
 
-      if (this.myTime === ''){
+      if (this.myTime === '') {
         this.onChoiceHour('15:00')
       }
 
-      for(let i=0; i<30; i++){
+      for (let i = 0; i < 30; i++) {
         let nextDay = new Date()
-        nextDay.setDate(today.getDate()+i)
-        this.DAYS.push({day: nextDay} )
+        nextDay.setDate(today.getDate() + i)
+        this.DAYS.push({day: nextDay})
       }
-      for(let i=1; i<=24; i++){
-        this.HOURS.push(i+":00")
+      for (let i = 9; i <= 18; i++) {
+        this.HOURS.push(i + ":00")
       }
 
       orderArr.forEach(el => {
@@ -86,11 +89,16 @@
         this.positions++
       })
 
-      this.$parent.myOrder = this.title+", "+this.positions+" "+this.wordSelection
+      if (this.positions > 1) {
+        this.myOrder = "Ремонт, " + this.positions + " " + this.wordSelection
+      } else {
+        this.myOrder = this.$parent.nameLastAddedWork
+      }
+      this.$parent.myOrder = this.myOrder
     },
     computed: {
       wordSelection: function () {
-        let val = (this.positions) ? this.positions.toString ().slice (-1) : ''
+        let val = (this.positions) ? this.positions.toString().slice(-1) : ''
         if (val === "1") {
           return "услуга"
         } else if (val === "2" || val === "3" || val === "4") {
@@ -99,22 +107,22 @@
         return "услуг"
       }
     },
-    methods:{
+    methods: {
       onChoiceDay: function (val) {
-        let D = val.getDate ()
-        let M = val.getMonth ()
-        let W = val.getDay ()
+        let D = val.getDate()
+        let M = val.getMonth()
+        let W = val.getDay()
 
         this.myDate = D + " " + M_arr[M] + ", " + W_arr[W]
         this.$parent.myDate = this.myDate
         this.viewDate = false
       },
-      onChoiceHour: function(val){
+      onChoiceHour: function (val) {
         this.myTime = val
         this.$parent.myTime = this.myTime
         this.viewTime = false
       },
-      onOrder: function(){
+      onOrder: function () {
         this.$parent.$_goToComponent('RepairDoneMD')
       }
     }

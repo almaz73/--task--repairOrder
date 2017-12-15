@@ -45,6 +45,7 @@
     computed: {
       totalAmmount: function () {
         let sum = 0;
+        if (this.$parent.orderArr.length==0) return sum;
         this.children.forEach(el => {
           sum += el.sum
         })
@@ -53,7 +54,7 @@
     },
     created: function () {
       let orderArr = this.$parent.orderArr
-      if (orderArr) {
+      if (orderArr.length>0) {
         this.title = "Заказ ремонта"
         this.children = orderArr
       } else {

@@ -51,10 +51,12 @@
       RepairDateMD,
       RepairDoneMD
     },
+    /**
+     * Тут происходит получение JSON через промисы
+     */
     asyncComputed: {
       repairJSON(){
         return new Promise((resolve, reject) => {
-          // получаем через промисы JSON
           setTimeout(function () {
             resolve(RepairData.dataJson)
           }, 200)
@@ -62,10 +64,14 @@
       }
     },
     router: router,
+    /**
+     * Тут храним в головном компоненте необходимые для всего проекта данные
+     */
     data(){
       return {
         idService: null,        // id услуги
         idWork: null,           // id работы
+        nameLastAddedWork: '',  // запоминаем имя последней добавленной работы
         fromBascketSumma: null, // сумма , если пришли менять количество из корзины
         orderArr: [],           // набор корзины
         isData: false,          // уже открыли панель выбора даты
@@ -106,7 +112,6 @@
        * @param sum {Number}
        */
       onAddWork: function (idWork, title, sum) {
-
         // исключить дублирование работ
         let exist = this.orderArr.find(el => {
           if (el.idWork === idWork) {
@@ -114,11 +119,10 @@
             return true;
           }
         })
-
         if (!exist) {
           this.orderArr.push({idWork, title, sum, idService: this.idService})
         }
-
+        this.nameLastAddedWork = title
         this.$_goToComponent('RepairOrderMD')
       },
       /**
@@ -383,29 +387,29 @@
   //</editor-fold>
   //<editor-fold desc="Календарь и часы" defaultstate="collapsed">
 
-  .panelDate{
+  .panelDate {
     position: absolute;
-    top:55px;
+    top: 55px;
     border: 1px solid $color_dark_blue;
     background: white;
     z-index: 10;
   }
 
-  .panelDays{
+  .panelDays {
     padding: 4px 0 0 4px;
     width: 214px;
     height: 160px;
   }
 
-  .panelTimes{
+  .panelTimes {
     left: -1px;
-    padding: 4px 0 0 4px;
-    width: 152px;
-    height: 160px;
+    padding: 4px 0 0 3px;
+    width: 153px;
+    height: 68px;
 
   }
 
-  .small_text a.bt{
+  .small_text a.bt {
     float: left;
     padding: 1px;
     border: 1px solid $color_dark_blue;
@@ -416,12 +420,17 @@
     width: 25px;
     text-align: center;
   }
-  .small_text a.bt:hover{
+
+  .small_text a.bt:hover {
     background: antiquewhite;
   }
 
-  .panelTimes.small_text a.bt{
-   font-size: 10px;
+  .panelTimes.small_text a.bt {
+    font-size: 10px;
+  }
+
+  .panelTimes.small_text a.bt div {
+    margin-top: 8px;
   }
 
   //</editor-fold>
@@ -433,6 +442,7 @@
   .link_top {
     margin-top: 43px;
   }
+
   //</editor-fold>
 
 

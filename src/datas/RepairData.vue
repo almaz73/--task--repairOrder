@@ -1,9 +1,3 @@
-<template>
-  <div>
-    <!--<button @click="changeA"> !!!!!</button>-->
-    <!--== {{sum}} ==-->
-  </div>
-</template>
 <script>
   export default{
     name: 'RepairData',
@@ -14,14 +8,18 @@
       }
     },
 
+    /**
+     * пример, чтобы проверить работу промисов: меняем значение, которое приведет к новому запросу
+     */
     methods: {
       changeA: function () {
-        // меняем значение, которое приведет к новому запросу
         this.x = 200
       }
     },
+    /**
+     * Запрос обновится, если изменятся входящие в него переменные
+     */
     asyncComputed: {
-       // запрос обновится, если изменятся входящие в него переменные
       sum () {
         const total = this.x + this.y;
         return new Promise(resolve =>
@@ -29,6 +27,9 @@
         )
       }
     },
+    /**
+     * json для проекта
+     */
     dataJson: {
       "type": "root",
       "id": 88,
