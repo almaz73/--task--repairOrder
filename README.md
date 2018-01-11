@@ -1,4 +1,5 @@
-> [Demo](http://fmap.ru/games/game/Repair/)
+&#9822; [ДЕМО](http://fmap.ru/games/game/Repair/) 
+======
 
 # repair_order
 
